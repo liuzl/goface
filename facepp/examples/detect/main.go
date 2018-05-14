@@ -2,19 +2,20 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
+	"github.com/liuzl/goface/facepp"
 	"log"
-
-	sdk "github.com/shiguanghuxian/face-golang-sdk"
 )
 
 var (
-	APIKey    = ""
-	APISecret = ""
+	ak = flag.String("ak", "", "API Key")
+	sk = flag.String("sk", "", "Secret Key")
 )
 
 func main() {
+	flag.Parse()
 	// 创建一个sdk对象
-	faceSDK, err := sdk.NewFaceSDK(APIKey, APISecret)
+	faceSDK, err := facepp.NewFaceSDK(*ak, *sk)
 	log.Println(err)
 	// 创建一个人脸检测api调用对象
 	detect, err := faceSDK.Detect()
